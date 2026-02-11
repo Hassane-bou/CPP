@@ -15,7 +15,6 @@ class Phonebook
         void AddContact();
         void ShowContact();
         Contact SearchContact(int index);
-
 };
 
 
