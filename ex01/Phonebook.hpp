@@ -15,6 +15,8 @@ class Phonebook
         void AddContact();
         void ShowContact();
         Contact SearchContact(int index);
+        bool ReadValidIndex(const std::string &text, int &index);
+
 };
 
 
