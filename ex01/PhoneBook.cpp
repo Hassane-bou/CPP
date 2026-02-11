@@ -148,4 +148,3 @@ Contact Phonebook::SearchContact(int index)
     }
     return tab[index];
 }
-

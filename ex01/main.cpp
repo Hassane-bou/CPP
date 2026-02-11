@@ -7,14 +7,15 @@ int main()
 {
     Phonebook obj;
     std::string command;
-            int index;
-    
+    int index;
+
         do
         {
         std::cout << "\n  This is commands what you can used:  " << "\n\n";
         std::cout << "1." << "ADD   " << "2." << "SEARCH   " << "3." << "EXIT   " <<"\n\n";
         std:: cout << "Please enter one of this command: ";
         std ::getline(std::cin,command);
+
         std::cout << "\n";
         if(std::cin.eof())
         {
