@@ -5,12 +5,15 @@
 int main(int argc,char  **argv)
 {
     if(argc == 1)
+    {
+        std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *\n";
         return  1;
+    }
     char *str;
-    for(int i = 1;argv[i];i++)
+    for(int i = 1; argv[i]; i++)
     {
         str = argv[i];
-        for(int j = 0;str[j] != '\0';j++)
+        for(int j = 0; str[j] != '\0';j++)
         {
             str[j] = toupper(str[j]);
         }
