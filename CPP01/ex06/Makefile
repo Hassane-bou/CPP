@@ -2,11 +2,11 @@ CC = c++
 
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRCS = Contact.cpp  main.cpp PhoneBook.cpp 
+SRCS = main.cpp Harl.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 
-NAME = PhoneBook
+NAME = HarlFilter
 
 all: $(NAME)
 
@@ -25,4 +25,3 @@ fclean: clean
 re: fclean all
 
 .Phony: clean
-	
