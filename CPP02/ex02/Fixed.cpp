@@ -3,7 +3,6 @@
 Fixed::Fixed()
 {
     value = 0;
-    std::cout << "Default constrctor called\n";
 }
 
 Fixed::Fixed(const int number)
@@ -17,25 +16,22 @@ Fixed::Fixed(const float number)
 
 Fixed::Fixed(const Fixed &other)
 {
-    std::cout << "Copy constructor Called\n";
     *this = other;
 }
 
 Fixed& Fixed::operator=(const Fixed &other)
 {
-    std::cout << "Copy assignement Called\n";
     this->value = other.value;
     return *this;
 }
 
 Fixed::~Fixed()
 {
-    std::cout << "Destructor Called\n";
 }
 
 float Fixed::toFloat(void) const
 {
-    return roundf(value /(1 << bits));
+    return (float)value /(1 << bits);
 }
 int Fixed::toInt(void) const
 {
@@ -69,44 +65,54 @@ bool Fixed::operator!=(const Fixed& ex) const
 
 Fixed Fixed::operator+(const Fixed& other) const
 {
-    return(this->value + other.value);
+    Fixed res;
+    res.value = this->value + other.value;
+    return(res);
 }
 
 Fixed Fixed::operator-(const Fixed& other) const
 {
-    return(this->value - other.value);
+    Fixed res;
+    res.value = this->value - other.value;
+    return(res); 
 }
 
 Fixed Fixed::operator*(const Fixed &other) const
 {
-    return(this->value * other.value);
+    Fixed res;
+    res.value = (this->value * other.value) >> bits;
+    return(res);
 }
 
 Fixed Fixed::operator/(const Fixed &other) const
 {
-    return(this->value / other.value);
+    Fixed res;
+    res.value = (this->value << bits) / other.value;
+    return(res);
 }
 
-Fixed Fixed::operator++(void)
+Fixed& Fixed::operator++(void)
 {
-    return(this->value += 1);
+    ++value;
+    return(*this);
 }
 
-Fixed Fixed::operator--(void)
+Fixed& Fixed::operator--(void)
 {
-    return(this->value -= 1);
+    --value;
+    return(*this);
 }
 
-Fixed& Fixed::operator++(int)
+Fixed Fixed::operator++(int)
 {
-    Fixed& temp = *this;
+    Fixed temp = *this;
     this->value += 1;
     return temp;
 }
 
-Fixed& Fixed::operator--(int)
+Fixed Fixed::operator--(int)
 {
-    Fixed& temp = *this;
+    Fixed temp = *this;
     this->value -= 1;
     return temp;
 }
