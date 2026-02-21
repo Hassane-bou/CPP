@@ -25,9 +25,7 @@ Fixed& Fixed::operator=(const Fixed &other)
     return *this;
 }
 
-Fixed::~Fixed()
-{
-}
+Fixed::~Fixed(){}
 
 float Fixed::toFloat(void) const
 {

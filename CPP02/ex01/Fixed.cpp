@@ -16,7 +16,6 @@ Fixed::Fixed(const float number)
 {
     std::cout << "Float constructor called\n";
     value =  roundf(number *(1 << bits));
-    
 }
 
 Fixed::Fixed(const Fixed &other)

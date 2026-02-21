@@ -40,7 +40,7 @@ bool Phonebook::ReadValidIndex(const std::string &text, int &index)
              return false;
         }
     }
-    index = std::stoi(input.c_str());
+    index = std::stoi(input);
     if(index < 0 || index > 7 )
     {
         std::cout << "\nIndex is out of range (0-7)\n";
