@@ -1,10 +1,13 @@
 #include "Cure.hpp"
 
-
-Cure::Cure()
+Cure::Cure():AMateria("cure")
 {
-    std::cout << "Cure Default constructor Called\n";
-    type = "cure";
+    // std::cout << "Cure Default constructor Called\n";
+}
+
+Cure::~Cure()
+{
+    // std::cout << "Cure Deconstructor Called\n";
 }
 
 AMateria* Cure::clone() const
@@ -13,7 +16,7 @@ AMateria* Cure::clone() const
     return ob;
 }
 
-void Cure::use(ICharacter& target) const
+void Cure::use(ICharacter& target)
 {
     std::cout << "* heals " << target.getName() << "'s wounds *\n";
 }

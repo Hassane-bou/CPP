@@ -2,7 +2,7 @@
 
 Character::Character()
 {
-    std::cout << "Character Default constructor Called\n";
+    // std::cout << "Character Default constructor Called\n";
     name = "";
     for(int i = 0; i < 4; i++)
         inventory[i] = NULL;
@@ -10,7 +10,7 @@ Character::Character()
 
 Character::Character(std::string text)
 {
-    std::cout << "Character constructor parametrer Called\n";
+    // std::cout << "Character constructor parametrer Called\n";
     name = text;
     for(int i = 0; i < 4; i++)
         inventory[i] = NULL;
@@ -18,7 +18,7 @@ Character::Character(std::string text)
 
 Character::~Character()
 {
-    std::cout << "Charactere Destructor Called\n";
+    // std::cout << "Charactere Destructor Called\n";
     for(int i = 0;i < 4 ; i++)
     {
         if(inventory[i] != NULL)
@@ -28,7 +28,7 @@ Character::~Character()
 
 Character::Character(const Character& obj)
 {
-    std::cout << "Charactere Copy constructor Called\n";
+    // std::cout << "Charactere Copy constructor Called\n";
     this->name = obj.name;
     for(int i = 0;i < 4;i++)
     {
@@ -41,7 +41,7 @@ Character::Character(const Character& obj)
 
 Character& Character::operator=(const Character &obj)
 {
-    std::cout << "Charactere Copy assignment operator Called\n";
+    // std::cout << "Charactere Copy assignment operator Called\n";
     if(this != &obj)
     {
         for(int i = 0;i < 4;i++)
@@ -67,7 +67,7 @@ std::string const &Character::getName() const
     return name;
 }
 
-void Character::equipe(AMateria *m)
+void Character::equip(AMateria *m)
 {
     if(m == NULL)
         return;

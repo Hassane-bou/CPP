@@ -3,6 +3,6 @@
 
 ICharacter::~ICharacter()
 {
-    std::cout << "Icharactere Deconstructor Called\n";
+    // std::cout << "Icharactere Deconstructor Called\n";
     
 }

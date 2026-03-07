@@ -8,6 +8,7 @@ class MateriaSource:public IMateriaSource
     private:
         AMateria *content[4];
     public:
+        MateriaSource();
         ~MateriaSource();
         void learnMateria(AMateria *);
         AMateria* createMateria(std::string const &type);
