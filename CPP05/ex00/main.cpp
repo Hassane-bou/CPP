@@ -1,0 +1,15 @@
+#include "Bureaucrat.hpp"
+
+
+int main()
+{
+   try{
+        Bureaucrat a("test",1);
+        a.incrementGrade();
+        std::cout << a;
+   }
+   catch(std::exception &e)
+   {
+    std::cout << e.what() << std::endl;
+   }
+}
