@@ -6,6 +6,7 @@
 
 #include "Form.hpp"
 
+
 class Bureaucrat{
     private:
         const std::string _name;
