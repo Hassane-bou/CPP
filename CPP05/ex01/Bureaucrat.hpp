@@ -4,6 +4,8 @@
 #include <string>
 #include <exception>
 
+#include "Form.hpp"
+
 class Bureaucrat{
     private:
         const std::string _name;
@@ -17,6 +19,8 @@ class Bureaucrat{
         int getGrade() const;
         void incrementGrade();
         void decrementGrade();
+        void signForm(Form &obj);
+
 
         class GradeTooHighException : public std::exception
         {
@@ -32,7 +36,7 @@ class Bureaucrat{
             public:
                  const char *what() const throw(){
                     return "Grade Too Low !";
-                };
+                }
         };
 
 };
