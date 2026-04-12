@@ -8,6 +8,7 @@ class Bureaucrat;
 
 
 class Form{
+
     private:
         const std::string _Name;
         bool _Signe;
@@ -41,5 +42,6 @@ class Form{
                 return "Grade Too Low!";
             }
     };
+    
 };
 std::ostream& operator<<(std::ostream& o, const Form& ob);
