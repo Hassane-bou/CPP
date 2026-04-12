@@ -25,35 +25,30 @@ Form::Form(const Form &obj):
 Form &Form::operator=(const Form &obj)
 {
     std::cout << "Copy assignement Called\n";
-    this->_Signe = obj._Signe;
+    if(this != &obj)
+        this->_Signe = obj._Signe;
     return *this;
+}
+
+std::string Form::getName() const
+{
+    return _Name;
 }
 
 int Form::getGradeSin() const
 {
     return _GradeSin;
 }
+
 int Form::getGradeEx() const
 {
     return _GradeEx;
-}
-std::string Form::getName() const
-{
-    return _Name;
 }
 
 bool Form::isSigne()
 {
     return _Signe;
 }
-std::ostream& operator<<(std::ostream& os, const Form& obj)
-{
-    std::cout << obj.getName() << ", Form grade Signe " << obj.getGradeSin();
-    std::cout  << ", Form grade Execute " << obj.getGradeEx() << "\n";
-
-    return os;  
-}
-
 
 void Form::beSigned(Bureaucrat &obj)
 {
@@ -62,3 +57,23 @@ void Form::beSigned(Bureaucrat &obj)
     else
         _Signe = true;
 }
+
+const char *Form::GradeTooHighException::what() const throw()
+{
+    return " Grade Too High !";
+}
+
+const char *Form::GradeTooLowException::what() const  throw()
+{
+    return " Grade Too Low !";
+}
+
+
+std::ostream& operator<<(std::ostream& os, const Form& obj)
+{
+    os << obj.getName() << ", Form grade Signe " << obj.getGradeSin();
+    os << ", Form grade Execute " << obj.getGradeEx() << "\n";
+
+    return os;  
+}
+

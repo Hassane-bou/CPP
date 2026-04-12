@@ -20,7 +20,8 @@ _name(other._name), _grade(other._grade)
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat &other)
 {
     std::cout << "Copy assignment Called\n";
-    this->_grade = other._grade;
+    if(this != &other)
+        this->_grade = other._grade;
     return *this;
 }
 
@@ -46,6 +47,16 @@ void Bureaucrat::decrementGrade()
     _grade++;
     if(_grade > 150)
         throw GradeTooLowException();
+}
+
+const char* Bureaucrat::GradeTooHighException::what() const throw()
+{
+    return " Grade Too High !";
+}
+
+const char* Bureaucrat::GradeTooLowException::what() const throw()
+{
+    return " Grade Too Low !";
 }
 
 std::ostream& operator<<(std::ostream& os, const Bureaucrat& obj)
