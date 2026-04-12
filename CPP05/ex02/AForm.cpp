@@ -1,0 +1,67 @@
+#include "AForm.hpp"
+
+
+AForm::AForm(const std::string name,bool isSigne, const int gradeToSign, const int gradeToExec):
+    _Name(name),_isSigne(isSigne),_gradeToSign(gradeToSign),_gradeToExecute(gradeToExec)
+{
+    // std::cout << "AForm Constructor parameter Called\n";
+    if(_gradeToSign < 1 || _gradeToExecute < 1)
+        throw GradeTooHighException();
+    if(_gradeToSign > 150 || _gradeToExecute > 150)
+        throw GradeTooLowException();
+}
+
+AForm::~AForm()
+{
+    // std::cout << "AForm Destructor called\n";
+}
+
+AForm::AForm(const AForm &obj):
+    _Name(obj._Name),_isSigne(obj._isSigne),_gradeToSign(obj._gradeToSign),_gradeToExecute(obj._gradeToExecute)
+{
+    std::cout << "AForm Copy constructor Called\n";
+}
+
+AForm& AForm::operator=(const AForm &obj)
+{
+    std::cout << "Copy Assignement called\n";
+    this->_isSigne = obj._isSigne;
+    return (*this);
+}
+
+std::string AForm::getName() const
+{
+    return _Name;
+}
+
+bool AForm::getSigne() const
+{
+    return _isSigne;
+}
+
+int AForm::getGradeToSign() const
+{
+    return _gradeToSign;
+}
+
+int AForm::getGradeToExec() const
+{
+    return _gradeToExecute;
+}
+
+void AForm::beSigned(Bureaucrat& Bur)
+{
+    if(Bur.getGrade() > _gradeToSign)
+        throw GradeTooLowException();
+    else
+        _isSigne = true;
+
+}
+
+void AForm::checkExecute(Bureaucrat const &executor) const
+{
+    if(_isSigne == false)
+        throw FormNotSignedException();
+    if(executor.getGrade() > _gradeToExecute)
+        throw GradeTooLowException();
+}
