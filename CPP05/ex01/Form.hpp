@@ -33,7 +33,6 @@ class Form{
                 return "Grade Too High!";
             }
     };
-
     class GradeTooLowException : public std::exception
     {
         public :
