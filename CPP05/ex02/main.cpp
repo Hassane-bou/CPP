@@ -7,11 +7,12 @@
 
 int main()
 {
-    srand((unsigned)time(NULL));
-    Bureaucrat a("norm",13);
-    ShrubberyCreationForm S("test");
-    
-    a.signAForm(S);
-    std::cout << "test"  << "\n";
-    a.executeForm(S);
+    srand(time(NULL));
+
+    Bureaucrat a("norm",15);
+    RobotomyRequestForm R("test");
+
+    a.signAForm(R);
+    a.executeForm(R);
+
 }

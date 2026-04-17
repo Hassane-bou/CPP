@@ -9,14 +9,17 @@ int main()
 {
     try
     {
-    Intern someRandomIntern;
-    AForm* test;
-    test = someRandomIntern.makeForm("Robotomy request", "Bender");
-    if(test)
-        delete test;
-    }catch(const std::exception& e)
+        Intern inter;
+        Bureaucrat b("boss",1);
+
+        AForm* f= inter.makeForm("shrubbery creation", "home");
+
+        b.signAForm(*f);
+        b.executeForm(*f);
+    }
+    catch(const std::exception& e)
     {
-        std::cout << e.what() << '\n';
+        std::cout << e.what() << std::endl;
     }
     
 }

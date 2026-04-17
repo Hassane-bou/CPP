@@ -1,27 +1,20 @@
 #include "RobotomyRequestForm.hpp"
 
 RobotomyRequestForm::RobotomyRequestForm(std::string target):
-    AForm("RobotmyRequestForm",false,72,45), _target(target)
-{
-    std::cout << "RobotomyRequestForm Constructor parameter called\n";
-}
+    AForm("RobotmyRequestForm",false,72,45), _target(target){}
 
-RobotomyRequestForm::~RobotomyRequestForm()
-{
-    std::cout << "RobotomyRequestForm Destructor called\n";
-}
+RobotomyRequestForm::~RobotomyRequestForm(){}
 
 RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &obj):
-    AForm(obj),_target(obj._target)
-{
-    std::cout << "RobotomyRequestForm  Copy constructor called\n";
-}
+    AForm(obj),_target(obj._target){}
 
 RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm &obj)
 {
-    std::cout << "RobotomyRequestForm Copy Assignement Called\n";
     if(this != &obj)
+    {
+        AForm::operator=(obj);
         this->_target = obj._target;
+    }
     return (*this);
 }
 

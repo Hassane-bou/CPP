@@ -4,9 +4,12 @@
 int main()
 {
    try{
-        Bureaucrat a("test",150);
+        Bureaucrat a("test",1);
+        a.incrementGrade();
+        std::cout << a;
         a.decrementGrade();
         std::cout << a;
+
    }
    catch(std::exception &e)
    {

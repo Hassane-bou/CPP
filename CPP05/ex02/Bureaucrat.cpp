@@ -2,15 +2,14 @@
 #include "AForm.hpp"
 
 Bureaucrat::Bureaucrat(const std::string name, int grade):
-    _Name(name),_Grade(grade)
-{
-    // std::cout << "Bureaucrat Constructor Called\n";
-}   
+    _Name(name),_Grade(grade){
+        if(_Grade < 1)
+            throw GradTooHighException();
+        if(_Grade > 150)
+            throw GradeTooLowException();
+    }   
 
-Bureaucrat::~Bureaucrat()
-{
-    // std::cout << "Bureaucrat Destructor Called\n";
-}
+Bureaucrat::~Bureaucrat(){}
 
 Bureaucrat::Bureaucrat(const Bureaucrat& obj):
     _Name(obj._Name),_Grade(obj._Grade)
@@ -20,7 +19,6 @@ Bureaucrat::Bureaucrat(const Bureaucrat& obj):
 
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat &obj)
 {
-    std::cout << "Bureaucrat Copy assignement Called\n";
     if(this != &obj)
         this->_Grade = obj._Grade;
     return(*this);
@@ -39,17 +37,17 @@ int Bureaucrat::getGrade() const
 
 void Bureaucrat::incrementGrade()
 {
-    _Grade++;
     if(_Grade > 150)
         throw GradeTooLowException();
+    _Grade++;
 }
 
 
 void Bureaucrat::decrementGrade()
 {
-    _Grade--;
     if(_Grade < 1)
         throw GradTooHighException();
+    _Grade--;
 }
 
 void Bureaucrat::signAForm(AForm &other)

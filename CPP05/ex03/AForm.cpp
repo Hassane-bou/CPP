@@ -4,17 +4,13 @@
 AForm::AForm(const std::string name,bool isSigne, const int gradeToSign, const int gradeToExec):
     _Name(name),_isSigne(isSigne),_gradeToSign(gradeToSign),_gradeToExecute(gradeToExec)
 {
-    // std::cout << "AForm Constructor parameter Called\n";
     if(_gradeToSign < 1 || _gradeToExecute < 1)
         throw GradeTooHighException();
     if(_gradeToSign > 150 || _gradeToExecute > 150)
         throw GradeTooLowException();
 }
 
-AForm::~AForm()
-{
-    // std::cout << "AForm Destructor called\n";
-}
+AForm::~AForm(){}
 
 AForm::AForm(const AForm &obj):
     _Name(obj._Name),_isSigne(obj._isSigne),_gradeToSign(obj._gradeToSign),_gradeToExecute(obj._gradeToExecute)

@@ -1,28 +1,21 @@
 #include "ShrubberyCreationForm.hpp"
 
 ShrubberyCreationForm::ShrubberyCreationForm(std::string target):
-    AForm("ShrubberyCreationForm",false,145,137),_target(target)
-{
-    // std::cout << "ShrubberyCreationForm Constructor parameter called\n";
-}
+    AForm("ShrubberyCreationForm",false,145,137),_target(target){}
 
-ShrubberyCreationForm::~ShrubberyCreationForm()
-{
-    // std::cout << "ShrubberyCreationForm Destructor called\n";
-}
+ShrubberyCreationForm::~ShrubberyCreationForm(){}
 
 
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& obj):
-    AForm(obj),_target(obj._target)
-{
-    std::cout << "ShrubberyCreationForm Copy Constructor called\n";
-}
+    AForm(obj),_target(obj._target){}
 
 ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationForm& obj)
 {
-    std::cout << "ShrubberyCreationForm copy assingment called\n";
     if(this != &obj)
+    {
+        AForm::operator=(obj);
         this->_target = obj._target;
+    }
     return(*this);
 }
 
