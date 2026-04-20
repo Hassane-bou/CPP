@@ -14,6 +14,7 @@ class Form{
         bool _Signe;
         const int _GradeSin; 
         const int _GradeEx;
+        Form();
     public:
         Form(const std::string name,bool signe,const int GradeSigne,const int GradeExecute);
         ~Form();

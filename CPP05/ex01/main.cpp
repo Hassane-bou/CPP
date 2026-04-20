@@ -5,16 +5,12 @@
 int main()
 {
     try{
-        Bureaucrat a("hello" , 50);
-        Form f("test",false , 40, 20);
+        Bureaucrat a("hello" , 130);
+        Form f("test",false , 12, 20);
 
-        std::cout << a << std::endl;
-        std::cout << f << std::endl;
-
+        a.incrementGrade();
         a.signForm(f);
-
-        std::cout << f << std::endl;  
-
+        std::cout << a;
 
     }catch(std::exception &ex)
     {

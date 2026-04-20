@@ -12,7 +12,7 @@ class AForm{
         bool _isSigne ;
         const int  _gradeToSign;
         const int _gradeToExecute;
-
+        AForm();
     public:
         AForm(const std::string name,bool isSigne,const int gradeToSign,const int gradeToExec);
         virtual ~AForm();

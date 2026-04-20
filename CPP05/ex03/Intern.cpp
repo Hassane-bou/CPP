@@ -3,6 +3,20 @@
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
 
+Intern::Intern(){}
+
+Intern::~Intern(){}
+
+Intern::Intern(const Intern &obj)
+{
+    (void)obj;
+}
+
+Intern& Intern::operator=(const Intern& obj)
+{
+    (void)obj;
+    return (*this);
+}
 
 AForm* CreateShrubbery(std::string target)
 {
@@ -21,9 +35,9 @@ AForm *CreatePresidentialPardon(std::string target)
 
 std::string names[3] =
 {
-    "Shrubbery Creation",
-    "Robotomy request",
-    "Presidential pardon"
+    "shrubbery creation",
+    "robotomy request",
+    "presidential pardon"
 };
 AForm* (*function[3])(std::string) =
 {
@@ -34,8 +48,7 @@ AForm* (*function[3])(std::string) =
 
 const char* Intern::FormNotFound::what() const throw()
 {
-    std::cout << "Form Not Found\n";
-    return NULL;
+     return " Form Not Found ";
 }
 
 
@@ -51,5 +64,5 @@ AForm* Intern::makeForm(std::string nameForm,std::string targetForm)
         }
     }
     throw FormNotFound();
-     
+
 }

@@ -1,21 +1,17 @@
 #include "Bureaucrat.hpp"
 
 Bureaucrat::Bureaucrat(const std::string name,int grade):
-_name(name),_grade(grade)
-{
-    std::cout << "Constructor parametrer Called\n";
+_name(name),_grade(grade){
+    if(grade < 1)
+        throw GradeTooHighException();
+    if(grade > 150)
+        throw GradeTooLowException();
 }
 
-Bureaucrat::~Bureaucrat()
-{
-    std::cout << "Bureaucrat Destructor Called\n";
-}
+Bureaucrat::~Bureaucrat(){}
 
 Bureaucrat::Bureaucrat(const Bureaucrat &other):
-_name(other._name), _grade(other._grade)
-{
-    std::cout << "Copy constructor Called\n";
-}
+_name(other._name), _grade(other._grade){}
 
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat &other)
 {
@@ -37,16 +33,16 @@ int Bureaucrat::getGrade() const
 
 void Bureaucrat::incrementGrade()
 {
-    _grade--;
     if(_grade < 1)
         throw GradeTooHighException();
+    _grade--;
 }
 
 void Bureaucrat::decrementGrade()
 {
-    _grade++;
     if(_grade > 150)
         throw GradeTooLowException();
+    _grade++;
 }
 
 const char* Bureaucrat::GradeTooHighException::what() const throw()
