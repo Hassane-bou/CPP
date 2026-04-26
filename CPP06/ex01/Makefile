@@ -2,28 +2,26 @@ CC = c++
 
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRCS =  ScalarConverter.cpp main.cpp
+SRCS = Serializer.cpp main.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 
-NAME = Convert
+NAME = Serializer
 
-
-all:$(NAME)
+all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
-%.o: %.cpp ScalarConverter.hpp
-	$(CC) $(CFLAGS) -c $< -o $@
+%.o: %.cpp Serializer.hpp
+	$(CC) $(CFLAGS) -c $< -o $@ 
 
 clean:
 	rm -f $(OBJS)
 
-fclean: clean
+fclean:clean
 	rm -f $(NAME)
 
 re: fclean all
-
 
 .Phony: clean
