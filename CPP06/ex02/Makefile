@@ -2,19 +2,18 @@ CC = c++
 
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRCS =  ScalarConverter.cpp main.cpp
+SRCS = main.cpp Base.cpp 
 
 OBJS = $(SRCS:.cpp=.o)
 
-NAME = Convert
+NAME = Base
 
-
-all:$(NAME)
+all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
-%.o: %.cpp ScalarConverter.hpp
+%.o: %.cpp Base.hpp
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
@@ -24,6 +23,5 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
-
 
 .Phony: clean
