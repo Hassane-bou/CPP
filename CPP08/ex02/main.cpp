@@ -9,6 +9,8 @@ int main()
     mstack.push(5);
     mstack.push(17);
 
+
+
     std::cout << mstack.top() <<std::endl;
 
     mstack.pop();
@@ -17,12 +19,60 @@ int main()
 
     mstack.push(3);
     mstack.push(5);
-
-    mstack.push(0);
     mstack.push(737);
 
+    mstack.push(0);
 
-    std::cout << mstack.top() <<std::endl;
+
+    MutantStack<int>::iterator it = mstack.begin();
+    MutantStack<int>::iterator ite = mstack.end();
+
+    ++it;
+    --it;
+
+    while(it!= ite)
+    {
+        std::cout << *it << std::endl;
+        it++;
+    }
+    std::stack<int> s(mstack);
+
+
+    /* *************test list***************/ 
+    
+        // MutantStack<int> mslist;
+
+        // mslist.push_back(5);
+        // mslist.push_back(17);
+
+
+
+        // std::cout << mslist.back() <<std::endl;
+
+        // mslist.pop_back();
+
+        // std::cout << mslist.size() <<std::endl;
+
+        // mslist.push_back(3);
+        // mslist.push_back(5);
+        // mslist.push_back(737);
+
+        // mslist.push_back(0);
+
+
+        // MutantStack<int>::iterator it = mslist.begin();
+        // MutantStack<int>::iterator ite = mslist.end();
+
+        // ++it;
+        // --it;
+
+        // while(it!= ite)
+        // {
+        //     std::cout << *it << std::endl;
+        //     it++;
+        // }
+        // // std::stack<int> s(mslist);
+
 
     return 0;
 }

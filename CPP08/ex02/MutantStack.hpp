@@ -3,7 +3,7 @@
 #include <iostream>
 #include <exception>
 #include <stack>
-#include <deque>
+#include <list>
 
 template<typename T>
 class MutantStack:public std::stack<T>
@@ -13,6 +13,17 @@ class MutantStack:public std::stack<T>
         ~MutantStack();
         MutantStack(const MutantStack& obj);
         MutantStack& operator=(const MutantStack& obj);
+
+        typedef typename std::stack<T>::container_type::iterator iterator;
+
+        iterator begin() 
+        {
+            return this->c.begin();
+        }
+        iterator end() 
+        {
+            return this->c.end();
+        }
     
 };
 
