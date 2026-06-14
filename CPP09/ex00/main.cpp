@@ -9,6 +9,7 @@ int main(int argc, char *argv[])
     }
 
     BitcoinExchange Bitcoin;
+    
     Bitcoin.RunFile(argv[1]);
 
 

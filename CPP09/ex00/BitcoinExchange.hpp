@@ -9,7 +9,9 @@ class BitcoinExchange
 {
     private:
         std::map<std::string, float> _data;
-    
+
+
+
     public:
         BitcoinExchange();
         ~BitcoinExchange();
@@ -18,3 +20,4 @@ class BitcoinExchange
 
         void RunFile(const std::string file);
 };
+    int CheckDateValide(std::string);
