@@ -29,33 +29,84 @@ int CheckDateValide(std::string date)
 {
 
     if(date.size() != 10)
+    {
+        std::cout << "Error: bad size input => " << date << std::endl;
         return 0;
+    }
 
     if(date[4] != '-' || date[7] != '-')
+    {
+        std::cout << "Error: bad input => " << date << std::endl;
         return 0;
-
+    }
     for(int i = 0; i < 4;i++)
-        if(!std::isdigit(date[i])) { return 0;}
-    
-    for(int i = 5; i < 7;i++)
-        if(!std::isdigit(date[i])) {return 0;}
+    {
+        if(!std::isdigit(date[i]))
+        { 
+            std::cout << "Error: bad input => " << date << std::endl;
+            return 0;
+        }
 
+    }
+    for(int i = 5; i < 7;i++)
+    {
+        if(!std::isdigit(date[i]))
+        {
+            std::cout << "Error: bad input => " << date << std::endl;
+            return 0;
+        }
+
+    }
     for(int i = 8; i < 10 ; i++)
-        if(!std::isdigit(date[i])) {return 0;}
+    {
+        if(!std::isdigit(date[i]))
+        {
+            std::cout << "Error: bad input => " << date << std::endl;
+            return 0;
+        }
+
+    }
 
     int M = std::atoi(date.substr(5,2).c_str());
     int D = std::atoi(date.substr(8,2).c_str());
 
     if(M <= 0 || M > 12)
+    {
+        std::cout << "Error: bad input => " << date << std::endl;
         return 0;
+    }
     if(D <= 0 || D > 31)
+    {
+        std::cout << "Error: bad input => " << date << std::endl;
         return 0;
+    }
 
     return 1;
 }
 int CheckValueValide(std::string value)
 {
-    return 0;
+    int i = 0;
+    int flage = 0;
+
+    if(value.empty())
+        return 0;
+    if(value[0] == '-')
+        i = 1;
+    while(value[i])
+    {
+        if(value[i] == '.')
+        {
+            flage++;
+        }
+        else if(!(std::isdigit(value[i])))
+        {
+            return 0;
+        }
+        if(flage > 1)
+            return 0;
+        i++;
+    }
+    return 1;
 }
 
 void BitcoinExchange::RunFile(std::string file)
@@ -66,7 +117,7 @@ void BitcoinExchange::RunFile(std::string file)
     std::getline(Inputfile,line);
     if(line != "date | value")
     {
-        std::cout << "Erreur: invalid file format\n";
+        std::cout << "Error: invalid file format\n";
         return;
     }
     while(std::getline(Inputfile,line))
@@ -82,25 +133,24 @@ void BitcoinExchange::RunFile(std::string file)
             date.erase(date.size() - 1);
         if(CheckDateValide(date) == 0)
         {
-            std::cout << "date Invalid\n";
             return ;
         }
-
         std::string value = line.substr(sep + 1);
         while(!value.empty() && value[value.size() - 1] == ' ')
             value.erase(value.size() - 1);
-        if(CheckValueValide(value) == 0)
+        if((CheckValueValide(value)) == 0)
         {
-            std::cout << "Erreur : Invalid input Value!\n";
             continue;
         }
         float realvalue = std::stof(value);
-
         std::cout << realvalue << std::endl;
-        if(realvalue <= 0 || realvalue > 1000)
+        if(realvalue < 0)
         {
-            std::cout << "Erreur: Value must be between 0 and 1000!!\n";    
-            return;
+            std::cout << "Error: not a positive number." << std::endl;
+        }
+        if(realvalue > 1000)
+        {
+            std::cout << "Error: too large a number.\n";    
         }
 
     }

@@ -4,7 +4,7 @@ int main(int argc, char *argv[])
 {
     if(argc != 2)
     {
-        std::cout << "Erreur: file not found , you must be added file en second parameter!!" << std::endl;
+        std::cout << "Error: could not open file." << std::endl;
         return 1;
     }
 
