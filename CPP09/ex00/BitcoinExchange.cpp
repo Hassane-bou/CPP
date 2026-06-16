@@ -27,47 +27,36 @@ BitcoinExchange::~BitcoinExchange() { }
 
 int CheckDateValide(std::string date)
 {
-    size_t sepa = date.find('-');
-    if(sepa == std::string::npos)
+
+    if(date.size() != 10)
         return 0;
-    int i = 0;
-    int count = 0;
-    while(date[i])
-    {
-        if(date[i] == '-')
-            count++;
-        i++;
-    }
-    if(count > 2)
+
+    if(date[4] != '-' || date[7] != '-')
         return 0;
-    std::string year = date.substr(0,sepa);
-    if(year.empty())
-    {
-        std::cout << "Erreur : Year not found!\n";
-        return 0;
-    }
-    i = 0;
-    while(year[i])
-    {
-        if(!(std::isdigit(year[i])))
-        {
-            std::cout << "Erreur: Year must be numbers!!\n";
-            return 0;
-        }
-        i++;
-    }
-    std::string mounth = date.substr(sepa + 1,sepa - 2);
+
+    for(int i = 0; i < 4;i++)
+        if(!std::isdigit(date[i])) { return 0;}
     
-    std::string day = date.substr(sepa + 4);
+    for(int i = 5; i < 7;i++)
+        if(!std::isdigit(date[i])) {return 0;}
 
-    std::cout << year << std::endl;
-    std::cout << mounth << std::endl;
-    std::cout << day << std::endl;
+    for(int i = 8; i < 10 ; i++)
+        if(!std::isdigit(date[i])) {return 0;}
 
+    int M = std::atoi(date.substr(5,2).c_str());
+    int D = std::atoi(date.substr(8,2).c_str());
+
+    if(M <= 0 || M > 12)
+        return 0;
+    if(D <= 0 || D > 31)
+        return 0;
 
     return 1;
 }
-
+int CheckValueValide(std::string value)
+{
+    return 0;
+}
 
 void BitcoinExchange::RunFile(std::string file)
 {
@@ -86,19 +75,33 @@ void BitcoinExchange::RunFile(std::string file)
         if(sep == std::string::npos)
         {
             std::cout << "bad input\n";
-            return ;
-
+            continue;
         }
         std::string date = line.substr(0,sep);
+        while(!date.empty() && date[date.size() - 1] == ' ')
+            date.erase(date.size() - 1);
         if(CheckDateValide(date) == 0)
         {
             std::cout << "date Invalid\n";
             return ;
         }
+
         std::string value = line.substr(sep + 1);
+        while(!value.empty() && value[value.size() - 1] == ' ')
+            value.erase(value.size() - 1);
+        if(CheckValueValide(value) == 0)
+        {
+            std::cout << "Erreur : Invalid input Value!\n";
+            continue;
+        }
+        float realvalue = std::stof(value);
 
-
-        // float realvalue = std::stof(value);
+        std::cout << realvalue << std::endl;
+        if(realvalue <= 0 || realvalue > 1000)
+        {
+            std::cout << "Erreur: Value must be between 0 and 1000!!\n";    
+            return;
+        }
 
     }
     Inputfile.close();
