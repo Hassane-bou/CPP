@@ -70,17 +70,11 @@ int CheckDateValide(std::string date)
     int M = std::atoi(date.substr(5,2).c_str());
     int D = std::atoi(date.substr(8,2).c_str());
 
-    if(M <= 0 || M > 12)
+    if(M <= 0 || M > 12 || D <= 0 || D > 31)
     {
         std::cout << "Error: bad input => " << date << std::endl;
         return 0;
     }
-    if(D <= 0 || D > 31)
-    {
-        std::cout << "Error: bad input => " << date << std::endl;
-        return 0;
-    }
-
     return 1;
 }
 int CheckValueValide(std::string value)
@@ -100,10 +94,14 @@ int CheckValueValide(std::string value)
         }
         else if(!(std::isdigit(value[i])))
         {
+            std::cout << "Error: Value is not digit ";
             return 0;
         }
         if(flage > 1)
+        {
+            std::cout << "Error: is not float value ";
             return 0;
+        }
         i++;
     }
     return 1;
@@ -125,7 +123,7 @@ void BitcoinExchange::RunFile(std::string file)
         size_t sep = line.find('|');
         if(sep == std::string::npos)
         {
-            std::cout << "bad input\n";
+            std::cout << "Error: bad input " << " => " << line << std::endl;
             continue;
         }
         std::string date = line.substr(0,sep);
@@ -133,25 +131,42 @@ void BitcoinExchange::RunFile(std::string file)
             date.erase(date.size() - 1);
         if(CheckDateValide(date) == 0)
         {
-            return ;
+            continue ;
         }
         std::string value = line.substr(sep + 1);
-        while(!value.empty() && value[value.size() - 1] == ' ')
-            value.erase(value.size() - 1);
+        while(!value.empty() && value[0] == ' ')
+            value.erase(0,1);
         if((CheckValueValide(value)) == 0)
         {
+            std::cout << " => " << value << std::endl;
             continue;
         }
         float realvalue = std::stof(value);
-        std::cout << realvalue << std::endl;
         if(realvalue < 0)
         {
             std::cout << "Error: not a positive number." << std::endl;
+            continue;
         }
         if(realvalue > 1000)
         {
-            std::cout << "Error: too large a number.\n";    
+            std::cout << "Error: too large a number.\n";
+            continue; 
         }
+
+        std::map<std::string ,float>::iterator it = _data.lower_bound(date);
+
+        if(it == _data.end())
+            it--;
+
+        if(it == _data.begin() && it->first != date)
+        {
+            std::cout << "Error: bad input => " << date;
+            continue;
+        }
+        if(it->first != date)
+            it--;
+
+        std::cout << date << " => "  << realvalue << " = " << realvalue * it->second << std::endl;
 
     }
     Inputfile.close();

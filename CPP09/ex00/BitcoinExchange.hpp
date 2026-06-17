@@ -8,7 +8,7 @@
 class BitcoinExchange
 {
     private:
-        std::map<std::string, float> _data;
+        std::map<std::string, float > _data;
 
 
 
