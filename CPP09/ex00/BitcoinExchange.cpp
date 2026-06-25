@@ -5,6 +5,11 @@ BitcoinExchange::BitcoinExchange()
     std::ifstream Filedata("data.csv");
     std::string line;
 
+    if(!Filedata.is_open())
+    {
+        std::cout << "Error: cannot open file data.csv" << std::endl;
+        std::exit(1); 
+    }
     std::getline(Filedata,line);
 
     while(std::getline(Filedata,line))
@@ -20,6 +25,18 @@ BitcoinExchange::BitcoinExchange()
 
     }
     Filedata.close();
+}
+
+BitcoinExchange::BitcoinExchange(const BitcoinExchange &obj)
+{
+    *this = obj;
+}
+
+BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange &obj)
+{
+    if(this != &obj)
+        this->_data = obj._data;
+    return *this;
 }
 
 BitcoinExchange::~BitcoinExchange() { }
@@ -107,10 +124,16 @@ int CheckValueValide(std::string value)
     return 1;
 }
 
-void BitcoinExchange::RunFile(std::string file)
+void BitcoinExchange::RunFile(const std::string file)
 {
     std::ifstream Inputfile(file);
     std::string line;
+
+    if(!Inputfile.is_open())
+    {
+        std::cout << "Error: cannot open the file input.txt" << std::endl;
+        return;
+    }
 
     std::getline(Inputfile,line);
     if(line != "date | value")

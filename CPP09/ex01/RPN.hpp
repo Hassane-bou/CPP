@@ -7,8 +7,7 @@
 class RPN
 {
     private:
-        std::vector <std::string> tokens;
-        std::stack <int> Numbers;
+        std::stack <int> tokens;
         RPN();
     public:
         RPN(std::string value);
@@ -16,8 +15,8 @@ class RPN
         RPN(const RPN &obj);
         RPN& operator=(const RPN &obj);
 
-        void CalculeRPN();
 };
     int NumberAndOpeartorValide(std::string input);
+    int checkNumber(std::string input);
     
 

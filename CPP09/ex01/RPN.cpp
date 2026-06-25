@@ -5,7 +5,12 @@ RPN::RPN(std::string value)
 {
     int start =0;
     int i = 0;
-    std::string N;
+    std::string val;
+    int N;
+    int right = 0;
+    int left = 0;
+    char oper;
+    int res = 0;
     while(value[i])
     {
         if(std::isdigit(value[i]))
@@ -17,25 +22,62 @@ RPN::RPN(std::string value)
                     break;
                 i++;
             }
-            N = value.substr(start,i - start);
-            tokens.push_back(N);
+            val = value.substr(start,i - start);
+            N = std::stoi(val);
+            tokens.push(N);
+            
         }
         else if(value[i] == '+' || value[i] == '-' || value[i] == '/' || value[i] == '*')
         {
-            int index = i;
-            N = value.substr(index,1);
-            tokens.push_back(N);
+            if(tokens.size() < 2)
+            {
+                std::cerr << "Error." << std::endl;
+                return;
+            }
+            oper = value[i];
+            right = tokens.top();
+            tokens.pop();
+            left = tokens.top();
+            tokens.pop();
+
+            if(oper == '+')
+            {
+                res = left + right;
+                tokens.push(res);
+            }
+            else if(oper == '-')
+            {
+                res = left - right;
+                tokens.push(res);
+            }
+            else if(oper == '/')
+            {
+                if(right == 0)
+                {
+                    std::cerr << "Error: cannot do operation with 0.\n";
+                    return ;
+                }
+                res = left / right;
+                tokens.push(res);
+            }
+            else if(oper == '*')
+            {
+                res = left * right;
+                tokens.push(res);
+            }
         }
+
         i++;
     }
 
-    // for(size_t i = 0; i < tokens.size();i++)
-    // {
-    //     std::cout <<  tokens[i] << std::endl;
-    // }
+    if(tokens.size() ==  1)
+        std::cout << tokens.top() << std::endl;
+    else
+    {
+        std::cerr << "Error " << std::endl;
+        return ;
+    }
 }
-
-
 
 RPN::~RPN() { }
 
@@ -52,6 +94,28 @@ int NumberAndOpeartorValide(std::string input)
     return 1;
 }
 
+int checkNumber(std::string input)
+{
+    int i = 0;
+    int start = 0;
+    while(input[i])
+    {
+        if(std::isdigit(input[i]))
+        {
+            start = i;
+            while(std::isdigit(input[i]))
+                i++;
+            std::string num = input.substr(start,i - start);
+    
+            if(std::atoi(num.c_str()) < 0 || std::atoi(num.c_str()) > 9)
+                return 0;
+        }
+        i++;
+    }
+    return 1;
+}
+
+
 RPN::RPN(const RPN& obj)
 {
     *this = obj;
@@ -63,68 +127,3 @@ RPN& RPN::operator=(const RPN& obj)
         this->tokens = obj.tokens;
     return *this;
 }
-
-void RPN::CalculeRPN()
-{
-    int num = 0;
-    int right = 0;
-    int left = 0;
-    char oper;
-    int res = 0;
-    for(size_t i = 0; i < tokens.size() ;i++)
-    {
-        if((tokens[i] != "-" && tokens[i] != "+" && tokens[i] != "*" && tokens[i] !="/"))
-        {
-            num = std::stoi(tokens[i]);
-            Numbers.push(num);
-        }
-        else
-        {
-            if(Numbers.size() < 2)
-            {
-                std::cerr << "Errorhh" << std::endl;
-                return ;
-            }
-            oper = tokens[i][0];
-            right = Numbers.top();
-            Numbers.pop();
-            left = Numbers.top();
-            Numbers.pop();
-
-            if(oper == '+')
-            {
-                res = left + right;
-                Numbers.push(res);
-            }
-            else if(oper == '-')
-            {
-                res = left - right;
-                Numbers.push(res);
-            }
-            else if(oper == '/')
-            {
-                if(right == 0)
-                {
-                    std::cerr << "Error: cannot do operation with 0.\n";
-                    return ;
-                }
-                res = left / right;
-                Numbers.push(res);
-            }
-            else if(oper == '*')
-            {
-                res = left * right;
-                Numbers.push(res);
-            }
-
-        }
-    }
-    if(Numbers.size() ==  1)
-        std::cout << Numbers.top() << std::endl;
-    else
-    {
-        std::cerr << "Error " << std::endl;
-        return ;
-    }
-}
-
