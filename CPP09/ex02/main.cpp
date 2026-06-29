@@ -8,19 +8,20 @@ int main(int ac,char **av)
         std::cout << "Error." << std::endl;
         return 1;
     }
-    int i = 1;
-    while(av[i])
+    std::vector<int> resulat = ParseArgs(ac,av);
+    if(resulat.empty())
     {
-        if(ParseInput(av[i]) == 1)
-        {
-
-            std::cout << "Error." << std::endl;
-            return 1;
-        }
-        i++;
+        std::cout << "Error: Container empty." << std::endl;
+        return 1;
     }
-    PmergeMe Pme;
+    std::deque<int> values =StoreValuesToDeque(resulat);
 
+    std::cout << "Before: ";
+    for(size_t i = 0; i < values.size();i++)
+    {
+        std::cout << values[i] << " ";
+    }
+    std::cout << std::endl;
     return 0;
 
 }

@@ -3,6 +3,8 @@
 #include <iostream>
 #include <vector>
 #include <deque>
+#include <cstdlib>
+#include <cerrno>
 
 
 
@@ -19,4 +21,6 @@ class PmergeMe
         PmergeMe& operator=(const PmergeMe& obj);
 
 };
-    int ParseInput(std::string input); 
+    std::vector<int> ParseArgs(int argc,char **argv);
+    std::deque<int> StoreValuesToDeque(std::vector<int>);
+    std::vector<std::pair<int,int>>MakePairs(const std::vector<int> &v, int &hasOdd, int &oddValue);
