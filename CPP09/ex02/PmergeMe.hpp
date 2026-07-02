@@ -22,5 +22,6 @@ class PmergeMe
 
 };
     std::vector<int> ParseArgs(int argc,char **argv);
-    std::deque<int> StoreValuesToDeque(std::vector<int>);
-    std::vector<std::pair<int,int>>MakePairs(const std::vector<int> &v, int &hasOdd, int &oddValue);
+    std::deque<int> StoreValuesToDeque(std::vector<int> &v);
+    std::vector<std::pair<int,int> >MakePairs(const std::vector<int> &v,bool &hasOdd, int &OddValue);
+    std::vector<int> mergeInsertSort(std::vector<int> &v);

@@ -22,6 +22,13 @@ int main(int ac,char **av)
         std::cout << values[i] << " ";
     }
     std::cout << std::endl;
+
+
+    std::vector<int> sortedVector = mergeInsertSort(resulat);
+
+  
+
+    
     return 0;
 
 }
