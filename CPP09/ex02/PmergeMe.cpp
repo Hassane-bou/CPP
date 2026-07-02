@@ -112,7 +112,6 @@ std::vector<std::pair<int,int> >MakePairs(const std::vector<int> &v,bool &hasOdd
     }
     else
         hasOdd = false;
-
     return pairs;
 }
 std::vector <int> BuilDMainChain(std::vector <int> &G,std::vector <int> &P)
@@ -126,6 +125,38 @@ std::vector <int> BuilDMainChain(std::vector <int> &G,std::vector <int> &P)
     return MainChain;
 }
 
+std::vector<std::pair<int,int> >mergeInsertSortPairs( std::vector<std::pair<int,int> > &pairs)
+{
+    if(pairs.size() <= 1)
+        return pairs;
+
+    size_t mid = pairs.size() / 2;
+
+    std::vector<std::pair<int,int> > left;
+    std::vector<std::pair<int,int> > right;
+
+
+    std::vector<std::pair<int,int> > test;
+
+    for(size_t i = 0;i < mid; i++)
+        left.push_back(pairs[i]);
+    
+
+    std::cout << "left: " << "\n";
+    for(size_t i = 0;i < left.size();i++)
+        std::cout << "{ " << left[i].first << "," << left[i].second << "}" << "\n";
+    
+
+    for(size_t i = mid; i < pairs.size() ;i++)
+        right.push_back(pairs[i]);
+
+    std::cout << "right: " << "\n";
+    for(size_t i = 0;i < right.size();i++)
+        std::cout << "{ " << right[i].first << "," << right[i].second << "}"  << "\n";
+
+    return test;
+}
+
 
 std::vector<int> mergeInsertSort(std::vector<int> &v)
 {
@@ -135,25 +166,11 @@ std::vector<int> mergeInsertSort(std::vector<int> &v)
     int OddValue = 0;
     std::vector<std::pair<int,int> > pairs = MakePairs(v,hasOdd,OddValue);
 
-    std::vector <int> Grands;
-    for(size_t i =0 ; i < pairs.size() ; i++)
-        Grands.push_back(pairs[i].first);
+    std::vector<std::pair<int,int> > PairSort = mergeInsertSortPairs(pairs);
 
-    std::vector <int> Petits;
-    for(size_t i = 0; i < pairs.size() ;i++)
-        Petits.push_back(pairs[i].second);
-    
-     for(size_t i = 0; i < Grands.size() ; i++)
-        std::cout << Grands[i] << " ";
+    std::vector<int> SorNUm;
 
+    return SorNUm;
 
-    Grands = mergeInsertSort(Grands);
-
-    std::vector <int> MainChain = BuilDMainChain(Grands,Petits);
-
-   
-
-
-    return Grands;
 }
 

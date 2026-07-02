@@ -5,6 +5,7 @@
 #include <deque>
 #include <cstdlib>
 #include <cerrno>
+#include <algorithm>
 
 
 
