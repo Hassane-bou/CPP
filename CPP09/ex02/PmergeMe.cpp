@@ -136,26 +136,71 @@ std::vector<std::pair<int,int> >mergeInsertSortPairs( std::vector<std::pair<int,
     std::vector<std::pair<int,int> > right;
 
 
-    std::vector<std::pair<int,int> > test;
 
     for(size_t i = 0;i < mid; i++)
         left.push_back(pairs[i]);
-    
-
-    std::cout << "left: " << "\n";
-    for(size_t i = 0;i < left.size();i++)
-        std::cout << "{ " << left[i].first << "," << left[i].second << "}" << "\n";
-    
-
     for(size_t i = mid; i < pairs.size() ;i++)
         right.push_back(pairs[i]);
+    
+    left = mergeInsertSortPairs(left);
+    right = mergeInsertSortPairs(right);
 
-    std::cout << "right: " << "\n";
-    for(size_t i = 0;i < right.size();i++)
-        std::cout << "{ " << right[i].first << "," << right[i].second << "}"  << "\n";
+    
+    std::vector<std::pair<int,int> > res;
 
-    return test;
+    size_t i = 0,j = 0;
+    while( i < left.size() && j < right.size())
+    {
+        if(left[i].first < right[j].first)
+        {
+            res.push_back(left[i]);
+            i++;
+        }
+        else
+        {
+            res.push_back(right[j]);
+            j++;
+        }
+    }
+    while(i < left.size())
+    {
+        res.push_back(left[i]);
+        i++;
+    }
+
+    while( j < right.size())
+    {
+        res.push_back(right[j]);
+        j++;
+    }
+
+    return res;
 }
+std::vector<size_t> GenerateJacobOrder(size_t n)
+{
+    std::vector<size_t> order;
+
+    size_t a = 0;
+    size_t b = 1;
+
+    if(n >= 1)
+        order.push_back(1);
+    while(true)
+    {
+        size_t next;
+        next = b + 2 * a;
+        if(next > n)
+            break;
+        if(next != b)
+            order.push_back(next);
+        a = b;
+        b =next;
+    }
+
+    return order;
+}
+
+
 
 
 std::vector<int> mergeInsertSort(std::vector<int> &v)
@@ -168,9 +213,30 @@ std::vector<int> mergeInsertSort(std::vector<int> &v)
 
     std::vector<std::pair<int,int> > PairSort = mergeInsertSortPairs(pairs);
 
-    std::vector<int> SorNUm;
+    std::cout << "PairSort trie: " << std::endl;
+    for(size_t i = 0;i < PairSort.size();i++)
+        std::cout << "{ " << PairSort[i].first << "," << PairSort[i].second << "}"  << "\n";
 
-    return SorNUm;
+    std::vector<int> MainChain;
+
+    MainChain.push_back(PairSort[0].second);
+    MainChain.push_back(PairSort[0].first);
+
+    for(size_t i = 1; i < PairSort.size();i++)
+        MainChain.push_back(PairSort[i].first);
+
+    std::vector <int> remainingSmall;
+    for(size_t i = 1;i < PairSort.size();i++)
+        remainingSmall.push_back(PairSort[i].second);
+
+    size_t n = remainingSmall.size();
+    std::vector<size_t> JacobGenearte = GenerateJacobOrder(n);
+
+
+    for(size_t i = 0;i < JacobGenearte.size();i++)
+        std::cout << JacobGenearte[i] << " ";
+
+    return remainingSmall;
 
 }
 
